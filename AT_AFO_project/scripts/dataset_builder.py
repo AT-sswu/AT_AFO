@@ -23,8 +23,11 @@ def build_dataset():
             fx, _ = extract_dominant_freq(window['Accel_X'].values)
             fy, _ = extract_dominant_freq(window['Accel_Y'].values)
             fz, _ = extract_dominant_freq(window['Accel_Z'].values)
+            gx, _ = extract_dominant_freq(window['Gyro_X'].values)
+            gy, _ = extract_dominant_freq(window['Gyro_Y'].values)
+            gz, _ = extract_dominant_freq(window['Gyro_Z'].values)
 
-            X.append([fx, fy, fz])
+            X.append([fx, fy, fz, gx, gy, gz])
             y.append(label)
 
-    return pd.DataFrame(X, columns=['fx', 'fy', 'fz']), pd.Series(y)
+    return pd.DataFrame(X, columns=['fx', 'fy', 'fz', 'gx', 'gy', 'gz']), pd.Series(y)
