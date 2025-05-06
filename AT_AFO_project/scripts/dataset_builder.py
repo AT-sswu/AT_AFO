@@ -20,9 +20,9 @@ def build_dataset():
 
         for i in range(0, len(df)-256, 128):  # 슬라이딩 윈도우
             window = df.iloc[i:i+256]  # 약 1.28초치 데이터 (샘플링 200Hz 가정)
-            fx, _ = extract_dominant_freq(window['accel x'].values)
-            fy, _ = extract_dominant_freq(window['accel y'].values)
-            fz, _ = extract_dominant_freq(window['accel z'].values)
+            fx, _ = extract_dominant_freq(window['Accel_X'].values)
+            fy, _ = extract_dominant_freq(window['Accel_Y'].values)
+            fz, _ = extract_dominant_freq(window['Accel_Z'].values)
 
             X.append([fx, fy, fz])
             y.append(label)
