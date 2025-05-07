@@ -9,7 +9,7 @@ def apply_fft(signal, sampling_rate=1):  # MATLAB의 Fs = 1과 동일
     """
 
     L = len(signal)                 # 샘플 개수
-    T = 1 / sampling_rate           # 샘플링 주기
+    T = 1 / sampling_rate           # 샘플링 주기 --> 조율 필요
     t = np.arange(0, L) * T         # 시간 벡터 (선택사항, 시각화용)
 
     fft_vals = np.fft.fft(signal)
