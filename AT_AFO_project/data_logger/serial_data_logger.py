@@ -1,31 +1,37 @@
 import serial
-import time
-import pandas as pd
-import numpy as np
+import csv
+from datetime import datetime
 
-ser = serial.Serial('COM3', 115200)  # 포트 번호 수정
+# 시리얼 포트 확인 필요
+SERIAL_PORT = 'COM3'
+BAUD_RATE = 250000
+DURATION_SECONDS = 10  # 수집 시간 설정
 
-data = []
-start_time = time.time()
-duration = 10  # 데이터 수집 시간
+filename = f"mpu6050_data_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
 
-while time.time() - start_time < duration:
-    line = ser.readline().decode().strip()
-    if line and "Accel" not in line:
-        parts = line.split(",")
-        if len(parts) == 7:
-            data.append(parts)
+# 시리얼 연결
+ser = serial.Serial(SERIAL_PORT, BAUD_RATE)
+ser.flushInput()
 
-df = pd.DataFrame(data, columns=[
-    'Time(ms)', 'Accel_X', 'Accel_Y', 'Accel_Z', 'Gyro_X', 'Gyro_Y', 'Gyro_Z'
-])
+print("데이터 수집 시작")
 
-# 공진 주파수 컬럼
-df['Resonant_Frequency'] = np.nan
+with open(filename, 'w', newline='') as csvfile:
+    writer = csv.writer(csvfile)
+    writer.writerow(['Accel_X', 'Accel_Y', 'Accel_Z', 'Gyro_X', 'Gyro_Y', 'Gyro_Z', 'Resonant_Frequency'])
 
-# 데이터 저장
-df.to_csv(".csv", index=False) #파일명 수정
+    start_time = datetime.now()
 
+    while (datetime.now() - start_time).total_seconds() < DURATION_SECONDS:
+        try:
+            line = ser.readline().decode('utf-8').strip()
+            if line:
+                data = line.split(',')
+                if len(data) == 6:
+                    data.append('')
+                    writer.writerow(data)
+        except Exception as e:
+            print("오류", e)
+            continue
+
+print("데이터 수집 완료")
 ser.close()
-
-print("데이터 수집 및 저장 완료")
