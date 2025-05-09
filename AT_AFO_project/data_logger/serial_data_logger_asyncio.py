@@ -4,8 +4,8 @@ import csv
 from datetime import datetime
 
 # 설정
-SERIAL_PORT = 'COM3'  # 포트 확인 필요
-BAUD_RATE = 250000
+SERIAL_PORT = 'COM4'  # 포트 확인 필요
+BAUD_RATE = 115200
 DURATION_SECONDS = 10  # 수집 시간
 
 # 파일 이름

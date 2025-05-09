@@ -3,8 +3,8 @@ import csv
 from datetime import datetime
 
 # 시리얼 포트 확인 필요
-SERIAL_PORT = 'COM3'
-BAUD_RATE = 250000
+SERIAL_PORT = 'COM4'
+BAUD_RATE = 115200
 DURATION_SECONDS = 10  # 수집 시간 설정
 
 filename = f"mpu6050_data_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
