@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
-from fft_analysis import fft_analysis
+from AT_data.fft_analysis import fft_analysis
 
 # ML 모델 학습 및 예측 함수
 def train_and_predict(data_dir='data', sample_rate=4096):

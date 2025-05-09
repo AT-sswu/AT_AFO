@@ -3,7 +3,7 @@ import glob
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from fft_analysis import fft_analysis
+from AT_data.fft_analysis import fft_analysis
 from model_train import train_and_predict
 
 # CSV FFT 분석 및 공진 주파수 저장
