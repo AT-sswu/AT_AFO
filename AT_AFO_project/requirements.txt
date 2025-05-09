@@ -4,3 +4,4 @@ matplotlib
 pyserial
 scipy
 scikit-learn
+pytest
